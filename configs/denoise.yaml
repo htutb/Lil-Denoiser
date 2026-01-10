@@ -1,5 +1,6 @@
 denoise_method: 'simple'
 denoiser:
+  _target_: src.denoisers.Denoiser
   alpha: 1.5
 dirs:
   input_dir: test_data

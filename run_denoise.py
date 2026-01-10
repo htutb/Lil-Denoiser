@@ -1,4 +1,4 @@
-from projects.lil_denoiser.src.denoisers import Denoiser
+from src.denoisers import Denoiser
 import warnings
 import hydra
 import torchaudio
@@ -27,7 +27,10 @@ def main(config):
     output_dir.mkdir(parents=True, exist_ok=True)
     
     denoiser = instantiate(config.denoiser)
-    denoise_fn = getattr(denoiser, f"{config.denoise_method}_denoiser")
+    if config.denoise_method == 'simple':
+      denoise_fn = denoiser.simple_denoiser
+    else:
+      denoise_fn = denoiser.window_denoiser
     
     for path in tqdm(input_dir.rglob("*"), desc='Denoising files...'):
         if path.suffix.lower() in allowed_extensions:
