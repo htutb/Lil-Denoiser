@@ -1,5 +1,6 @@
-torch==2.6.0
-torchaudio==2.6.0
+torch
+torchaudio
+soundfile
 tqdm
 matplotlib
 hydra-core
